@@ -16,78 +16,78 @@ export const PENTATONIC_DESCRIPTION = 'All Pentatonic Scales';
 
 
 export const C_MAJOR_SCALE : Translate = {
-  FR: 'Do majeur echelle',
+  FR: 'Gamme Do majeur',
   EN: 'C major Scale',
 };
 
 export const Cm_HARMONIC_SCALE: Translate = {
-  FR: 'Do mineur harmonique',
+  FR: 'Gamme Do mineur harmonique',
   EN: 'C minor harmonic scale',
 };
 
 export const D_MAJOR_SCALE: Translate = {
-  FR: 'Ré majeur echelle',
+  FR: ' Gamme Ré majeur',
   EN: 'D major scale',
 };
 
 export const E_MAJOR_SCALE: Translate = {
-  FR: 'Mi majeur echelle',
+  FR: 'Gamme Mi majeur',
   EN: 'E major scale',
 };
 
 export const F_MAJOR_SCALE: Translate = {
-  FR: 'Fa majeur echelle',
+  FR: 'Gamme Fa majeur',
   EN: 'F major scale',
 };
 
 export const G_MAJOR_SCALE: Translate = {
-  FR: 'Sol majeur echelle',
+  FR: 'Gamme Sol majeur',
   EN: 'G major scale',
 };
 
 export const A_MAJOR_SCALE: Translate = {
-  FR: 'La majeur echelle',
+  FR: 'Gamme La majeur',
   EN: 'A major scale',
 };
 
 export const B_MAJOR_SCALE: Translate = {
-  FR: 'Si majeur echelle',
+  FR: 'Gamme Si majeur',
   EN: 'B major scale',
 };
 
 export const Csharp_MAJOR_SCALE: Translate = {
-  FR: 'Do# majeur echelle',
+  FR: 'Gamme Do# majeur',
   EN: 'C# major scale',
 };
 
 export const Dsharp_MAJOR_SCALE: Translate = {
-  FR: 'Ré# majeur echelle',
+  FR: 'Gamme Ré# majeur',
   EN: 'D# major scale',
 };
 
 
 export const Dm_HARMONIC_SCALE: Translate = {
-  FR: 'Ré mineur harmonique',
+  FR: 'Gamme Ré mineur harmonique',
   EN: 'D minor harmonic scale',
 };
 export const Em_HARMONIC_SCALE: Translate = {
-  FR: 'Mi mineur harmonique',
+  FR: 'Gamme Mi mineur harmonique',
   EN: 'E minor harmonic scale',
 };
 export const Fm_HARMONIC_SCALE: Translate = {
-  FR: 'Fa mineur harmonique',
+  FR: 'Gamme Fa mineur harmonique',
   EN: 'F minor harmonic scale',
 };
 export const Gm_HARMONIC_SCALE: Translate = {
-  FR: 'Sol mineur harmonique',
+  FR: 'Gamme Sol mineur harmonique',
   EN: 'G minor harmonic scale',
 };
 export const Am_HARMONIC_SCALE: Translate = {
-  FR: 'La mineur harmonique',
+  FR: 'Gamme La mineur harmonique',
   EN: 'A minor harmonic scale',
 };
 export const Bm_HARMONIC_SCALE: Translate = {
-  FR: 'Si mineur harmonique',
+  FR: 'Gamme Si mineur harmonique',
   EN: 'B minor harmonic scale',
 };
 
