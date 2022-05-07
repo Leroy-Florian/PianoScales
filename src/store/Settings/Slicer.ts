@@ -85,7 +85,7 @@ const SettingSlice = createSlice({
   initialState: initialState,
   reducers: {
     toggleMajorC: (state) => {
-      const result = {
+      return {
         ...state,
         scale: {
           ...state.scale,
@@ -108,7 +108,6 @@ const SettingSlice = createSlice({
         },
       };
     },
-
     toggleMajorE: (state) => {
       return {
         ...state,
@@ -214,6 +213,24 @@ const SettingSlice = createSlice({
       };
     },
 
+    selectMajorAllSelected: (state) => {
+      return {
+        ...state,
+        scale: {
+          ...state.scale,
+          Major: {...state.scale.Major, allSelected: true},
+        },
+      };
+    },
+    unselectMajorAllSelected: (state) => {
+      return {
+        ...state,
+        scale: {
+          ...state.scale,
+          Major: {...state.scale.Major, allSelected: false},
+        },
+      };
+    },
 
     toggleMinorHarmonicCm: (state) => {
       return {
@@ -255,11 +272,13 @@ export const {
   unselectAllMajor,
   toggleMinorHarmonicCm,
   toggleMinorHarmonicDm,
+  selectMajorAllSelected,
+  unselectMajorAllSelected,
 } = SettingSlice.actions;
 
 export default SettingSlice.reducer;
 
-const isAllMajorSelected = (state : settingsState ) : boolean => {
+export const isAllMajorSelected = (state : settingsState ) : boolean => {
   const major = state.scale.Major;
   if (!major.A.value) return false;
   if (!major.B.value) return false;
@@ -270,6 +289,7 @@ const isAllMajorSelected = (state : settingsState ) : boolean => {
   if (!major.G.value) return false;
   return true;
 };
+
 
 // todo a sortir dans le app et a mettre dans le useEffect de settings avec une belle fonction propre qui gere le state des all select / Unselecte
 //    if (isAllMajorSelected(result)) {
@@ -285,3 +305,4 @@ const isAllMajorSelected = (state : settingsState ) : boolean => {
 //         };
 //       }
 //       return result;
+

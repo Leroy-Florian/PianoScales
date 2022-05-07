@@ -1,27 +1,35 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BaseModal} from './BaseModal';
 
 import {dispatchStore, useAppSelector} from '../../store/type';
 
 import {closeModal} from '../../store/Modal/Slicer';
 import {
-  selectAllMajor,
+  isAllMajorSelected,
+  selectAllMajor, selectMajorAllSelected,
   toggleMajorC,
   toggleMajorD,
   toggleMajorE,
   toggleMajorF,
-  toggleMajorG, unselectAllMajor,
+  toggleMajorG, unselectAllMajor, unselectMajorAllSelected,
 } from '../../store/Settings/Slicer';
 
 
 export const SettingsModal = () => {
   const {
     scale,
-
-  } =
-    useAppSelector((state) => state.persistedStore.settingsStore);
+  } = useAppSelector((state) => state.persistedStore.settingsStore);
   const {isSettingsModalOpen} = useAppSelector((state) => state.nonPersistedStore.modalStore);
   const Major = scale.Major;
+
+  // useEffect(()=> {
+  //   if (isAllMajorSelected(scale)) {
+  //     dispatchStore(selectMajorAllSelected());
+  //   } else {
+  //     dispatchStore(unselectMajorAllSelected());
+  //   }
+  // }, []);
+
   return (
     <BaseModal title="Settings" isOpen={isSettingsModalOpen} handleClose={()=>dispatchStore(closeModal())}>
 

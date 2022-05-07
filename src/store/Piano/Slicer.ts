@@ -40,9 +40,9 @@ const PianoSlice = createSlice({
       return {...state, notesRecorded: false};
     },
 
-    onStopNoteInput: (state) => {
+    onStopNoteInput: (state, payload) => {
       if (state.notesRecorded === false) {
-        // this.recordNotes(prevActiveNotes, this.state.noteDuration);
+        recordNotes(state, payload);
         return {...state, notesRecorded: true, noteDuration: DEFAULT_NOTE_DURATION};
       }
     },

@@ -12,6 +12,7 @@ import {CustomPiano} from './components/Piano/Piano';
 function App() {
   const {currentGuesses} = useAppSelector((state) => state.persistedStore.gameStore);
   const settings = useAppSelector((state) => state.persistedStore.settingsStore);
+  const {recording} = useAppSelector((state) => state.nonPersistedStore.pianoStore);
   useEffect(() => {
     dispatchStore(setCurrentGuesses(pickRandomItemInArray(pickScaleFromSettings(settings))));
   }, [settings]);
@@ -28,6 +29,8 @@ function App() {
 
             {JSON.stringify(currentGuesses)}
             <CustomPiano/>
+            <div>{JSON.stringify(recording.events)}</div>
+
 
           </div>
           <InfoModal/>
