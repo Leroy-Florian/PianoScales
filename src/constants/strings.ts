@@ -1,9 +1,23 @@
-import {Translate} from './validGuesses';
+import {Translate} from '../domain/models/translate';
+import {gameModeSetting} from '../domain/models/settings';
 
-export const GAME_TITLE = process.env.REACT_APP_GAME_NAME!;
+export const GAME_TITLE = 'Piano Scales';
+export const WELCOME_TITLE = `Welcome to ${GAME_TITLE}`;
 
 export const WIN_MESSAGES = ['Great Job!', 'Awesome', 'Well done!'];
-export const GAME_COPIED_MESSAGE = 'Game copied to clipboard';
+export const GAME_COPIED_MESSAGE = 'game copied to clipboard';
+export const DIFFICULTIES = {
+  EASY: 'Easy',
+  MEDIUM: 'Medium',
+  HARD: 'Hard',
+};
+export const NEXT = 'next';
+export const DIFFICULTIES_CARD_TITLE = 'difficulties';
+export const DIFFICULTIES_SELECTION_TITLE = 'Select difficulty';
+export const DIFFICULTIES_SELECTION_DESC = 'Pick a difficulty level and start the game';
+
+export const difficulty_description = (difficulty: gameModeSetting) : string =>
+  `In ${difficulty.title} mode you have to guess the word before the time runs out (${difficulty.duration} sec) and have a maximum of ${difficulty.try} guesses.`;
 
 
 export const MINOR_HARMONIC_DESCRIPTION = 'All Minor Harmonic';
@@ -14,6 +28,21 @@ export const JAZZ_DESCRIPTION = 'All Jazz Scales';
 export const BLUES_DESCRIPTION = 'All Blues Scales';
 export const PENTATONIC_DESCRIPTION = 'All Pentatonic Scales';
 
+export const Cm_MELODIC_SCALE = 'Cm melodic Scale';
+export const Cm_NATURAL_SCALE = 'Cm natural Scale';
+
+
+export const PENTATONIC_SCALE = ' Scale';
+export const JAZZ_SCALE = 'Jazz Scale';
+export const BLUES_SCALE = 'blues Scale';
+
+export const STATISTICS_TITLE = 'Statistics';
+export const GUESS_DISTRIBUTION_TEXT = 'Guess Distribution';
+export const SHARE_TEXT = 'Share';
+export const TOTAL_TRIES_TEXT = 'Total tries';
+export const SUCCESS_RATE_TEXT = 'Success rate';
+export const CURRENT_STREAK_TEXT = 'Current streak';
+export const BEST_STREAK_TEXT = 'Best streak';
 
 export const C_MAJOR_SCALE : Translate = {
   FR: 'Gamme Do majeur',
@@ -26,7 +55,7 @@ export const Cm_HARMONIC_SCALE: Translate = {
 };
 
 export const D_MAJOR_SCALE: Translate = {
-  FR: ' Gamme Ré majeur',
+  FR: 'Gamme Ré majeur',
   EN: 'D major scale',
 };
 
@@ -90,21 +119,3 @@ export const Bm_HARMONIC_SCALE: Translate = {
   FR: 'Gamme Si mineur harmonique',
   EN: 'B minor harmonic scale',
 };
-
-export const Cm_MELODIC_SCALE = 'Cm melodic Scale';
-export const Cm_NATURAL_SCALE = 'Cm natural Scale';
-
-
-export const PENTATONIC_SCALE = ' Scale';
-export const JAZZ_SCALE = 'Jazz Scale';
-export const BLUES_SCALE = 'blues Scale';
-
-export const STATISTICS_TITLE = 'Statistics';
-export const GUESS_DISTRIBUTION_TEXT = 'Guess Distribution';
-export const NEW_SCALE_TEXT = 'New Scale in';
-export const SHARE_TEXT = 'Share';
-export const TOTAL_TRIES_TEXT = 'Total tries';
-export const SUCCESS_RATE_TEXT = 'Success rate';
-export const CURRENT_STREAK_TEXT = 'Current streak';
-export const BEST_STREAK_TEXT = 'Best streak';
-

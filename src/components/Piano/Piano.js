@@ -1,29 +1,102 @@
-import {MidiNumbers, Piano} from 'react-piano';
 import React from 'react';
-import {onPlayNoteInput, onStopNoteInput} from '../../store/Piano/Slicer';
 import SoundfontProvider from './soundProvider';
-import {audioContext, soundfontHostname} from './constants';
-export const CustomPiano = () => {
-  const firstNote = MidiNumbers.fromNote('c3');
-  const lastNote = MidiNumbers.fromNote('f5');
+import {audioContext, keyboardShortcuts, noteRange, soundfontHostname} from './constants';
+import _ from 'lodash';
+import scheduledEvents from 'lodash/_SetCache';
+import {Piano} from 'react-piano';
+import {useAppSelector} from '../../store/type';
+import {VALID_MAJOR_SCALE} from '../../constants/validGuesses';
+import {play} from '../../lib/game';
 
+
+export const CustomPiano = () => {
+  const {currentGuesses, scaleToDiscover} = useAppSelector((state) => state.persistedStore.gameStore);
+
+  const [state, setState] = React.useState({
+    recording: {
+      mode: 'RECORDING',
+      events: [],
+      currentTime: 0,
+      currentEvents: [],
+    },
+  });
+
+  const onPlayNoteInput = (midiNumber) => {
+    console.log('onPlayNoteInput', midiNumber);
+    play(currentGuesses, midiNumber, scaleToDiscover);
+  };
+
+  //
+  // const playRecorded = (scale) => {
+  //   setState({...state, recording: {...state.recording, mode: 'PLAYING'}});
+  //   const startAndEndTimes = _.uniq(
+  //       _.flatMap(state.recording.events, (event) => [
+  //         event.time,
+  //         event.time + event.duration,
+  //       ]),
+  //   );
+  //   startAndEndTimes.forEach((time) => {
+  //     scheduledEvents.push(
+  //         setTimeout(() => {
+  //           const currentEvents = state.recording.events.filter((event) => {
+  //             return event.time <= time && event.time + event.duration > time;
+  //           });
+  //           setState({...state, recording: {...state.recording, currentEvents}});
+  //         }, time * 1000),
+  //     );
+  //   });
+  //   setTimeout(() => {
+  //     onClickStop();
+  //   }, getRecordingEndTime() * 1000);
+  // };
+
+  // const getRecordingEndTime = () => {
+  //   if (state.recording.events.length === 0) {
+  //     return 0;
+  //   }
+  //   return Math.max(
+  //       ...state.recording.events.map((event) => event.time + event.duration),
+  //   );
+  // };
+
+  //
+  // const onClickStop = () => {
+  //   scheduledEvents.forEach((scheduledEvent) => {
+  //     clearTimeout(scheduledEvent);
+  //   });
+  //   setState({
+  //     ...state,
+  //     recording: {
+  //       ...state.recording,
+  //       mode: 'RECORDING',
+  //       currentEvents: [],
+  //     },
+  //   });
+  // };
 
   return (
-    <SoundfontProvider
-      instrumentName="acoustic_grand_piano"
-      hostname={soundfontHostname}
-      audioContext={audioContext}
-      render={({isLoading, playNote, stopNote}) => (
-        <Piano
-          noteRange={{first: firstNote, last: lastNote}}
-          playNote={playNote}
-          stopNote={stopNote}
-          disabled={isLoading}
-          width={800}
-          onPlayNoteInput={onPlayNoteInput}
-          onStopNoteInput={onStopNoteInput}
-        />
-      )}
-    />
+    <>
+      <SoundfontProvider
+        instrumentName="acoustic_grand_piano"
+        hostname={soundfontHostname}
+        audioContext={audioContext}
+        render={({isLoading, playNote, stopNote}) => (
+          <Piano
+            recording={state.recording}
+            noteRange={noteRange}
+            onPlayNoteInput={onPlayNoteInput}
+            width={800}
+            playNote={playNote}
+            stopNote={stopNote}
+            disabled={isLoading}
+            keyboardShortcuts={keyboardShortcuts}
+          />
+        )}
+      />
+      {/* <button onClick={() => playRecorded(VALID_MAJOR_SCALE[0])}>test</button>*/}
+      {/* <div>{JSON.stringify(state.recording.events)}</div>*/}
+      {/* <div>{JSON.stringify(VALID_MAJOR_SCALE[0])}</div>*/}
+    </>
   );
 };
+

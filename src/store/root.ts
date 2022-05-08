@@ -1,13 +1,21 @@
-import {persist, persistConfig} from './Persist';
+import {persist, persistConfig} from './persist';
 import {
   combineReducers,
   configureStore,
 } from '@reduxjs/toolkit';
-import modalReducer from './Modal/Slicer';
-import settingsReducer from './Settings/Slicer';
-import gameReducer from './Game/Slicer';
-import pianoReducer from './Piano/Slicer';
+import modalReducer from './modal/slicer';
+import settingsReducer from './settings/slicer';
+import gameReducer from './game/slicer';
+import pianoReducer from './piano/slicer';
 import {persistStore} from 'redux-persist';
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from 'redux-persist/es/constants';
 
 
 export const store = configureStore({
@@ -21,6 +29,12 @@ export const store = configureStore({
       pianoStore: pianoReducer,
     }),
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 

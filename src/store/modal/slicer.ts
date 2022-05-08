@@ -22,7 +22,6 @@ const ModalSlice = createSlice({
   },
 });
 
-
 export const {
   toggleInfoModal,
   toggleSettingsModal,

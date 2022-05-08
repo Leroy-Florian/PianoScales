@@ -5,7 +5,7 @@ import {
   InformationCircleIcon,
 } from '@heroicons/react/outline';
 import {dispatchStore} from '../../store/type';
-import {toggleInfoModal, toggleSettingsModal} from '../../store/Modal/Slicer';
+import {toggleInfoModal, toggleSettingsModal} from '../../store/modal/slicer';
 
 export const Navbar = () => {
   return (

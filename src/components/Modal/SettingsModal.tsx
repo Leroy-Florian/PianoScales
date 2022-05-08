@@ -1,18 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {BaseModal} from './BaseModal';
 
 import {dispatchStore, useAppSelector} from '../../store/type';
 
-import {closeModal} from '../../store/Modal/Slicer';
-import {
-  isAllMajorSelected,
-  selectAllMajor, selectMajorAllSelected,
-  toggleMajorC,
-  toggleMajorD,
-  toggleMajorE,
-  toggleMajorF,
-  toggleMajorG, unselectAllMajor, unselectMajorAllSelected,
-} from '../../store/Settings/Slicer';
+import {closeModal} from '../../store/modal/slicer';
+import {toggleMajorScale} from '../../store/settings/slicer';
 
 
 export const SettingsModal = () => {
@@ -22,13 +14,6 @@ export const SettingsModal = () => {
   const {isSettingsModalOpen} = useAppSelector((state) => state.nonPersistedStore.modalStore);
   const Major = scale.Major;
 
-  // useEffect(()=> {
-  //   if (isAllMajorSelected(scale)) {
-  //     dispatchStore(selectMajorAllSelected());
-  //   } else {
-  //     dispatchStore(unselectMajorAllSelected());
-  //   }
-  // }, []);
 
   return (
     <BaseModal title="Settings" isOpen={isSettingsModalOpen} handleClose={()=>dispatchStore(closeModal())}>
@@ -46,7 +31,7 @@ export const SettingsModal = () => {
                 <header className="p-6 text-center">
                   <p className="text-lg font-medium">Gamme Majeur</p>
                   <label className="flex items-center text-sm">
-                    <input type="checkbox" className="w-6 h-6 border border-gray-200 rounded-md" checked={Major.allSelected} onChange={()=> Major.allSelected ?dispatchStore(unselectAllMajor()): dispatchStore(selectAllMajor())}/>
+                    {/* <input type="checkbox" className="w-6 h-6 border border-gray-200 rounded-md" checked={Major.allSelected} onChange={()=> Major.allSelected ? dispatchStore(unselectAllMajor()): dispatchStore(selectAllMajor())}/>*/}
                     <span className="ml-3 font-medium">select all</span>
                   </label>
                 </header>
@@ -55,21 +40,21 @@ export const SettingsModal = () => {
                 <ul className="grid grid-cols-1 gap-4 mt-6 sm:grid-cols-2">
                   <li>
                     <label className="flex items-center text-sm">
-                      <input type="checkbox" className="w-6 h-6 border border-gray-200 rounded-md" checked={Major.C.value} onChange={()=>dispatchStore(toggleMajorC())}/>
+                      <input type="checkbox" className="w-6 h-6 border border-gray-200 rounded-md" checked={Major.C} onChange={()=>dispatchStore(toggleMajorScale('C'))}/>
                       <span className="ml-3 font-medium">Do</span>
                     </label>
                   </li>
 
                   <li>
                     <label className="flex items-center text-sm">
-                      <input type="checkbox" className="w-6 h-6 border border-gray-200 rounded-md" checked={Major.D.value} onChange={()=>dispatchStore(toggleMajorD())}/>
+                      <input type="checkbox" className="w-6 h-6 border border-gray-200 rounded-md" checked={Major.D} onChange={()=>dispatchStore(toggleMajorScale('D'))}/>
                       <span className="ml-3 font-medium">Re</span>
                     </label>
                   </li>
 
                   <li>
                     <label className="flex items-center text-sm">
-                      <input type="checkbox" className="w-6 h-6 border border-gray-200 rounded-md" checked={Major.E.value} onChange={()=>dispatchStore(toggleMajorE())}/>
+                      <input type="checkbox" className="w-6 h-6 border border-gray-200 rounded-md" checked={Major.E} onChange={()=>dispatchStore(toggleMajorScale('E'))}/>
                       <span className="ml-3 font-medium">Mi</span>
                     </label>
                   </li>
@@ -78,13 +63,13 @@ export const SettingsModal = () => {
 
                   <li>
                     <label className="flex items-center text-sm">
-                      <input type="checkbox" className="w-6 h-6 border border-gray-200 rounded-md" checked={Major.F.value} onChange={()=>dispatchStore(toggleMajorF())}/>
+                      <input type="checkbox" className="w-6 h-6 border border-gray-200 rounded-md" checked={Major.F} onChange={()=>dispatchStore(toggleMajorScale('F'))}/>
                       <span className="ml-3 font-medium">Fa</span>
                     </label>
                   </li>
                   <li>
                     <label className="flex items-center text-sm">
-                      <input type="checkbox" className="w-6 h-6 border border-gray-200 rounded-md" checked={Major.G.value} onChange={()=>dispatchStore(toggleMajorG())}/>
+                      <input type="checkbox" className="w-6 h-6 border border-gray-200 rounded-md" checked={Major.G} onChange={()=>dispatchStore(toggleMajorScale('G'))}/>
                       <span className="ml-3 font-medium">Sol</span>
                     </label>
                   </li>

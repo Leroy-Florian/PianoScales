@@ -12,18 +12,10 @@ import {
   Fm_HARMONIC_SCALE,
   G_MAJOR_SCALE, Gm_HARMONIC_SCALE,
 } from './strings';
-import {settingsState} from '../store/Settings/Slicer';
 import {array} from 'prop-types';
+import {Scale} from '../domain/models/scale';
+import {Settings} from '../domain/models/settings';
 
-export type Translate = {
-  FR: string;
-  EN: string;
-}
-export type Scale = {
-  key : Keys[number];
-  notes: string[],
-  notation : Translate
-}
 
 export enum Keys{
   C = 'C',
@@ -43,81 +35,82 @@ export enum Keys{
 }
 
 
-const VALID_MAJOR_SCALE: Scale[] = [
+export const VALID_MAJOR_SCALE: Scale[] = [
   {
     key: Keys.C,
-    notes: ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C'],
+    notes: [48, 50, 52, 53, 55, 57, 59],
     notation: C_MAJOR_SCALE,
   },
-  {
-    key: Keys.D,
-    notes: ['D', 'E', 'F', 'G', 'A', 'B', 'C', 'S'],
-    notation: D_MAJOR_SCALE,
-  },
-  {
-    key: Keys.E,
-    notes: ['E', 'F', 'G', 'A', 'B', 'C', 'D', 'E'],
-    notation: E_MAJOR_SCALE,
-  },
-  {
-    key: Keys.F,
-    notes: ['F', 'G', 'A', 'B', 'C', 'D', 'E', 'F'],
-    notation: F_MAJOR_SCALE,
-  },
-  {
-    key: Keys.G,
-    notes: ['G', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
-    notation: G_MAJOR_SCALE,
-  },
-  {
-    key: Keys.A,
-    notes: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'A'],
-    notation: A_MAJOR_SCALE,
-  },
-  {
-    key: Keys.B,
-    notes: ['B', 'C', 'D', 'E', 'F', 'G', 'A', 'B'],
-    notation: B_MAJOR_SCALE,
-  },
 ];
-
-const VALID_MINOR_HARMONIC_SCALE: Scale[] = [
-  {
-    key: Keys.Cm,
-    notes: ['H', 'A', 'R', 'M', 'O', 'N', 'I', 'C'],
-    notation: Cm_HARMONIC_SCALE,
-  },
-  {
-    key: Keys.Dm,
-    notes: ['D', 'E', 'F', 'G', 'A', 'B', 'C', 'D'],
-    notation: Dm_HARMONIC_SCALE,
-  },
-  {
-    key: Keys.Em,
-    notes: ['E', 'F', 'G', 'A', 'B', 'C', 'D', 'E'],
-    notation: Em_HARMONIC_SCALE,
-  },
-  {
-    key: Keys.Fm,
-    notes: ['F', 'G', 'A', 'B', 'C', 'D', 'E', 'F'],
-    notation: Fm_HARMONIC_SCALE,
-  },
-  {
-    key: Keys.Gm,
-    notes: ['G', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
-    notation: Gm_HARMONIC_SCALE,
-  },
-  {
-    key: Keys.Am,
-    notes: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'A'],
-    notation: Am_HARMONIC_SCALE,
-  },
-  {
-    key: Keys.Bm,
-    notes: ['B', 'C', 'D', 'E', 'F', 'G', 'A', 'B'],
-    notation: Bm_HARMONIC_SCALE,
-  },
-];
+//   {
+//     key: Keys.D,
+//     notes: ['D', 'E', 'F', 'G', 'A', 'B', 'C', 'S'],
+//     notation: D_MAJOR_SCALE,
+//   },
+//   {
+//     key: Keys.E,
+//     notes: ['E', 'F', 'G', 'A', 'B', 'C', 'D', 'E'],
+//     notation: E_MAJOR_SCALE,
+//   },
+//   {
+//     key: Keys.F,
+//     notes: ['F', 'G', 'A', 'B', 'C', 'D', 'E', 'F'],
+//     notation: F_MAJOR_SCALE,
+//   },
+//   {
+//     key: Keys.G,
+//     notes: ['G', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
+//     notation: G_MAJOR_SCALE,
+//   },
+//   {
+//     key: Keys.A,
+//     notes: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'A'],
+//     notation: A_MAJOR_SCALE,
+//   },
+//   {
+//     key: Keys.B,
+//     notes: ['B', 'C', 'D', 'E', 'F', 'G', 'A', 'B'],
+//     notation: B_MAJOR_SCALE,
+//   },
+// ];
+//
+// const VALID_MINOR_HARMONIC_SCALE: Scale[] = [
+//   {
+//     key: Keys.Cm,
+//     notes: ['H', 'A', 'R', 'M', 'O', 'N', 'I', 'C'],
+//     notation: Cm_HARMONIC_SCALE,
+//   },
+//   {
+//     key: Keys.Dm,
+//     notes: ['D', 'E', 'F', 'G', 'A', 'B', 'C', 'D'],
+//     notation: Dm_HARMONIC_SCALE,
+//   },
+//   {
+//     key: Keys.Em,
+//     notes: ['E', 'F', 'G', 'A', 'B', 'C', 'D', 'E'],
+//     notation: Em_HARMONIC_SCALE,
+//   },
+//   {
+//     key: Keys.Fm,
+//     notes: ['F', 'G', 'A', 'B', 'C', 'D', 'E', 'F'],
+//     notation: Fm_HARMONIC_SCALE,
+//   },
+//   {
+//     key: Keys.Gm,
+//     notes: ['G', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
+//     notation: Gm_HARMONIC_SCALE,
+//   },
+//   {
+//     key: Keys.Am,
+//     notes: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'A'],
+//     notation: Am_HARMONIC_SCALE,
+//   },
+//   {
+//     key: Keys.Bm,
+//     notes: ['B', 'C', 'D', 'E', 'F', 'G', 'A', 'B'],
+//     notation: Bm_HARMONIC_SCALE,
+//   },
+// ];
 // const VALID_JAZZ_SCALE: Scale[] = [
 //   {
 //     notes: ['J', 'A', 'Z', 'Z', 'Z', 'Z', 'Z', 'Z'],
@@ -157,26 +150,3 @@ const VALID_MINOR_HARMONIC_SCALE: Scale[] = [
 //     ENNotation: BLUES_SCALE,
 //   },
 // ];
-export const pickScaleFromSettings = (settings: settingsState): Scale[] => {
-  const result: Scale[] = [];
-  const {
-    scale,
-  } = settings;
-
-
-  // if (scale.Major) result.push(VALID_MAJOR_SCALE. );
-  // if (scale.MinorHarmonic) result.push(...VALID_MINOR_HARMONIC_SCALE);
-  // if (scale.Jazz) result.push(...VALID_JAZZ_SCALE);
-  // if (scale.MinorMelodic) result.push(...VALID_MINOR_MELODIC);
-  // if (scale.MinorNatural) result.push(...VALID_MINOR_NATURAL);
-  // if (scale.Pentatonic) result.push(...VALID_PENTATONIC);
-  // if (scale.Blues) result.push(...VALID_BLUES);
-  return VALID_MAJOR_SCALE;
-};
-
-
-export const pickRandomItemInArray = (array: any[]) => {
-  const randomIndex = Math.floor(Math.random() * array.length);
-  return array[randomIndex];
-};
-

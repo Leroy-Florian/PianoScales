@@ -1,7 +1,7 @@
 import {persistReducer} from 'redux-persist';
 import storage from 'redux-persist/es/storage';
 
-export const persistConfig =(key:string) =>({
+export const persistConfig = (key:string) =>({
   key: key,
   version: 1,
   storage,

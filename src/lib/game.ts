@@ -1,26 +1,39 @@
-import {Scale} from '../constants/validGuesses';
+import {Scale} from '../domain/models/scale';
+import {dispatchStore} from '../store/type';
+import {addGuessed, addTries, setGameStatus} from '../store/game/slicer';
+import {GameStatus} from '../domain/models/game';
+import {GameService} from '../domain/services/gameService';
+import {currentGuess} from '../domain/models/currentGuess';
 
-export const IsWinningScale = (scale: Scale): boolean => {
-  return solution === scale.notes;
+const {
+  guessIsInScale,
+  guessIsAlreadyTried,
+  isWinningScale,
+  guessIsAlreadyGuessed,
+} = GameService;
+
+export const play = (
+    currentGuess : currentGuess,
+    midi : number,
+    scaleToDiscover: Scale,
+) : void => {
+  console.log('currentGuess', currentGuess);
+  console.log('midi', midi);
+  console.log('scaletoDiscover', scaleToDiscover);
+  if (!guessIsAlreadyTried(currentGuess, midi)) {
+    dispatchStore(addTries(midi));
+  }
+  if (!guessIsAlreadyGuessed(currentGuess, midi) &&
+        guessIsInScale(scaleToDiscover, midi)) {
+    dispatchStore(addGuessed(midi));
+  }
+  if (isWinningScale(scaleToDiscover, currentGuess.guessed)) {
+    setGameStatus(GameStatus.won);
+  }
+  // else {
+  // incrementCurrentTry();
+  //   if (!guessIsAlreadyTried(state.currentGuesses, action.payload)) {
+  //     return {...state, currentTry: state.currentTry + 1};
+  //   }
+  // }
 };
-
-const getScaleOfDay = () => {
-  const epochMs = new Date(2022, 4).valueOf();
-  const now = Date.now();
-  const msInDay = 86400000;
-  const index = Math.floor((now - epochMs) / msInDay);
-  const nextStep = (index + 1) * msInDay + epochMs;
-
-  return {
-    solution: ['S', 'O', 'L', 'U', 'T', 'I', 'O', 'N'],
-    solutionIndex: index,
-    nextStep: nextStep,
-  };
-};
-
-export const {
-  solution,
-  solutionIndex,
-  nextStep,
-} = getScaleOfDay();
-
