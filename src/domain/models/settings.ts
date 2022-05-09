@@ -1,5 +1,5 @@
 export type Settings = {
-    scale :Record<scaleArchetype, scaleType>;
+    scale : Record<scaleArchetype, scaleType>;
     gameMode : gameModeSetting,
     userSettings :{
         firstTime: boolean,

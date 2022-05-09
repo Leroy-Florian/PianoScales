@@ -2,6 +2,7 @@ import {Scale} from '../models/scale';
 import {currentGuess} from '../models/currentGuess';
 import {IGameService} from '../ports/gamePorts';
 import {commonsTools} from './commonsTools';
+import {gameModeSetting} from '../models/settings';
 
 
 const isWinningScale = (scaleToDiscover : Scale, scale: number[]): boolean => {
@@ -20,10 +21,14 @@ const guessIsAlreadyGuessed = (guesses: currentGuess, guess: number): boolean =>
   return guesses.guessed.includes(guess);
 };
 
+const isGameOver = (currentTry : number, setting : gameModeSetting): boolean => {
+  return currentTry >= setting.try;
+};
 
 export const GameService : IGameService= {
   isWinningScale,
   guessIsInScale,
   guessIsAlreadyTried,
   guessIsAlreadyGuessed,
+  isGameOver,
 };

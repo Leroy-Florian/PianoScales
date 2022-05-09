@@ -1,5 +1,5 @@
 import {Settings} from '../domain/models/settings';
-import reducer, {toggleMajorScale} from '../store/settings/slicer';
+import reducer, {toggleMajorScale, toggleMinorHarmonicScale} from '../store/settings/slicer';
 import {EASY_MODE} from '../constants/setting';
 
 
@@ -24,10 +24,7 @@ const defaultState: Settings = {
       B: false,
     },
   },
-  gameSettings: {
-    gameMode: EASY_MODE,
-    maxTries: 3,
-  },
+  gameMode: EASY_MODE,
   userSettings: {
     dailyChallenge: false,
     dailyObjectives: 0,
@@ -89,6 +86,62 @@ test('Should toggle Major Cs scale', ()=> {
         },
       });
 },
-)
-;
+);
+
+
+test('Should toggle Major C scale', ()=> {
+  const previousState = {...defaultState};
+  expect(reducer(previousState, toggleMinorHarmonicScale( 'Cm')))
+      .toEqual({
+        ...previousState,
+        scale: {
+          ...previousState.scale,
+          MinorHarmonic: {
+            ...previousState.scale.MinorHarmonic,
+            Cm: true,
+          },
+        },
+      });
+},
+);
+
+test('Should toggle Major D scale', ()=> {
+  const previousState = {...defaultState};
+  expect(reducer(previousState, toggleMinorHarmonicScale( 'Dm')))
+      .toEqual({
+        ...previousState,
+        scale: {
+          ...previousState.scale,
+          MinorHarmonic: {
+            ...previousState.scale.MinorHarmonic,
+            Dm: true,
+          },
+        },
+      });
+},
+);
+
+test('Should toggle MinorHarmonic Cm scale', ()=> {
+  const previousState = {...defaultState, scale: {
+    ...defaultState.scale,
+    MinorHarmonic: {
+      ...defaultState.scale.MinorHarmonic,
+      Cm: true,
+    },
+  },
+  };
+  expect(reducer(previousState, toggleMinorHarmonicScale('Cm')))
+      .toEqual({
+        ...previousState,
+        scale: {
+          ...previousState.scale,
+          MinorHarmonic: {
+            ...previousState.scale.MinorHarmonic,
+            Cm: false,
+          },
+        },
+      });
+},
+);
+
 

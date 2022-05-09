@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {Settings} from '../../domain/models/settings';
 import {EASY_MODE} from '../../constants/setting';
 
@@ -49,6 +49,18 @@ const SettingSlice = createSlice({
         },
       };
     },
+    toggleMinorHarmonicScale: (state, action) => {
+      return {
+        ...state,
+        scale: {
+          ...state.scale,
+          MinorHarmonic: {
+            ...state.scale.MinorHarmonic,
+            [action.payload]: !state.scale.MinorHarmonic[action.payload as keyof typeof state.scale.MinorHarmonic],
+          },
+        },
+      };
+    },
     toggleFirstTime: (state ) => {
       return {
         ...state,
@@ -69,6 +81,7 @@ const SettingSlice = createSlice({
 
 export const {
   toggleMajorScale,
+  toggleMinorHarmonicScale,
   toggleFirstTime,
   setGameMode,
 } = SettingSlice.actions;

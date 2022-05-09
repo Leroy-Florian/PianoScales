@@ -1,16 +1,14 @@
 import React from 'react';
 import SoundfontProvider from './soundProvider';
 import {audioContext, keyboardShortcuts, noteRange, soundfontHostname} from './constants';
-import _ from 'lodash';
-import scheduledEvents from 'lodash/_SetCache';
 import {Piano} from 'react-piano';
-import {useAppSelector} from '../../store/type';
-import {VALID_MAJOR_SCALE} from '../../constants/validGuesses';
+
 import {play} from '../../lib/game';
+import {useAppSelector} from '../../store/type';
 
 
 export const CustomPiano = () => {
-  const {currentGuesses, scaleToDiscover} = useAppSelector((state) => state.persistedStore.gameStore);
+  const game = useAppSelector((state) => state.persistedStore.gameStore);
 
   const [state, setState] = React.useState({
     recording: {
@@ -23,7 +21,7 @@ export const CustomPiano = () => {
 
   const onPlayNoteInput = (midiNumber) => {
     console.log('onPlayNoteInput', midiNumber);
-    play(currentGuesses, midiNumber, scaleToDiscover);
+    play( midiNumber, game);
   };
 
   //

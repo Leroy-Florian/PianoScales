@@ -2,9 +2,11 @@ import {Translate} from '../domain/models/translate';
 import {gameModeSetting} from '../domain/models/settings';
 
 export const GAME_TITLE = 'Piano Scales';
-export const WELCOME_TITLE = `Welcome to ${GAME_TITLE}`;
+export const WELCOME_TITLE = `Welcome to ${GAME_TITLE}`
 
-export const WIN_MESSAGES = ['Great Job!', 'Awesome', 'Well done!'];
+;export const LOOSE_MESSAGE = 'Try Again';
+export const WIN_MESSAGES = 'Great Job!';
+
 export const GAME_COPIED_MESSAGE = 'game copied to clipboard';
 export const DIFFICULTIES = {
   EASY: 'Easy',

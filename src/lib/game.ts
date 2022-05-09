@@ -1,39 +1,27 @@
-import {Scale} from '../domain/models/scale';
 import {dispatchStore} from '../store/type';
-import {addGuessed, addTries, setGameStatus} from '../store/game/slicer';
-import {GameStatus} from '../domain/models/game';
+import {addGuessed, addTries, incrementCurrentTry} from '../store/game/slicer';
+import {Game} from '../domain/models/game';
 import {GameService} from '../domain/services/gameService';
-import {currentGuess} from '../domain/models/currentGuess';
 
 const {
   guessIsInScale,
   guessIsAlreadyTried,
-  isWinningScale,
   guessIsAlreadyGuessed,
 } = GameService;
 
 export const play = (
-    currentGuess : currentGuess,
     midi : number,
-    scaleToDiscover: Scale,
+    game : Game,
 ) : void => {
-  console.log('currentGuess', currentGuess);
-  console.log('midi', midi);
-  console.log('scaletoDiscover', scaleToDiscover);
-  if (!guessIsAlreadyTried(currentGuess, midi)) {
+  if (!guessIsAlreadyTried(game.currentGuesses, midi)) {
     dispatchStore(addTries(midi));
   }
-  if (!guessIsAlreadyGuessed(currentGuess, midi) &&
-        guessIsInScale(scaleToDiscover, midi)) {
+  if (!guessIsAlreadyGuessed(game.currentGuesses, midi) &&
+        guessIsInScale(game.scaleToDiscover, midi)) {
     dispatchStore(addGuessed(midi));
   }
-  if (isWinningScale(scaleToDiscover, currentGuess.guessed)) {
-    setGameStatus(GameStatus.won);
+  if (!guessIsAlreadyGuessed(game.currentGuesses, midi) &&
+      !guessIsInScale(game.scaleToDiscover, midi)) {
+    dispatchStore(incrementCurrentTry());
   }
-  // else {
-  // incrementCurrentTry();
-  //   if (!guessIsAlreadyTried(state.currentGuesses, action.payload)) {
-  //     return {...state, currentTry: state.currentTry + 1};
-  //   }
-  // }
 };

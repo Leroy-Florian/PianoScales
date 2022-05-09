@@ -25,27 +25,37 @@ const GameSlice = createSlice({
       };
     },
     addGuessed: (state, action) => {
-      return {
-        ...state,
-        currentGuesses: {
-          ...state.currentGuesses,
-          guessed: [...state.currentGuesses.guessed, action.payload],
-        },
-      };
+      if (action.payload != state.currentGuesses.guessed[state.currentGuesses.guessed.length - 1]) {
+        return {
+          ...state,
+          currentGuesses: {
+            ...state.currentGuesses,
+            guessed: [...state.currentGuesses.guessed, action.payload],
+          },
+        };
+      }
     },
     addTries: (state, action) => {
-      return {
-        ...state,
-        currentGuesses: {
-          ...state.currentGuesses,
-          tries: [...state.currentGuesses.tries, action.payload],
-        },
-      };
+      if (action.payload != state.currentGuesses.tries[state.currentGuesses.tries.length - 1]) {
+        return {
+          ...state,
+          currentGuesses: {
+            ...state.currentGuesses,
+            tries: [...state.currentGuesses.tries, action.payload],
+          },
+        };
+      }
     },
     setGameStatus: (state, action) => {
       return {
         ...state,
         gameStatus: action.payload,
+      };
+    },
+    resetGame: (state) => {
+      return {
+        ...state,
+        ...initialState,
       };
     },
     incrementCurrentTry: (state) => {
@@ -64,6 +74,7 @@ export const {
   addTries,
   setGameStatus,
   incrementCurrentTry,
+  resetGame,
 } = GameSlice.actions;
 
 export default GameSlice.reducer;
