@@ -3,44 +3,42 @@ import './App.css';
 import {Navbar} from './components/Navbar/Navbar';
 import {InfoModal} from './components/Modal/InfoModal';
 import {SettingsModal} from './components/Modal/SettingsModal';
-import {dispatchStore, useAppSelector} from './store/type';
+import {useAppDispatch, useAppSelector} from './store/type';
 import {CustomPiano} from './components/Piano/Piano';
-import {toggleInfoModal, toggleLooseModal, toggleWinModal} from './store/modal/slicer';
-import {toggleFirstTime} from './store/settings/slicer';
 import {Footer} from './components/Footer/Footer';
 import {LoosingModal} from './components/Modal/LoosingModal';
 import {WonModal} from './components/Modal/WonModal';
-import {setGameStatus} from './store/game/slicer';
-import {GameStatus} from './domain/models/game';
 import {GameService} from './domain/services/gameService';
+import {FirstTime, LooseGame, WinGame} from './lib/batchActions';
 
 
 function App() {
-  const {scaleToDiscover, currentGuesses, currentTry, gameStatus} = useAppSelector((state) => state.persistedStore.gameStore);
+  const dispatchStore = useAppDispatch();
+  const {
+    scaleToDiscover,
+    currentGuesses,
+    currentTry,
+    gameStatus,
+  } = useAppSelector((state) => state.persistedStore.gameStore);
   const {userSettings, gameMode} = useAppSelector((state) => state.persistedStore.settingsStore);
   const {isWinningScale, isGameOver} = GameService;
+
   // useEffect(() => {
   //   dispatchStore(setCurrentGuesses(pickRandomItemInArray(pickScaleFromSettings(settings))));
   // }, [settings]);
 
   useEffect(() => {
     if (userSettings.firstTime) {
-      dispatchStore(toggleInfoModal());
-      dispatchStore(toggleFirstTime());
+      dispatchStore(FirstTime);
     }
   }, []);
 
   useEffect(() => {
     if (isGameOver(currentTry, gameMode)) {
-      console.log('GAME OVER');
-      dispatchStore(toggleInfoModal());
-      dispatchStore(toggleLooseModal());
-      dispatchStore(setGameStatus(GameStatus.lost));
+      dispatchStore(LooseGame);
     }
     if (isWinningScale(scaleToDiscover, currentGuesses.guessed)) {
-      console.log('WINNING');
-      dispatchStore(toggleWinModal());
-      dispatchStore(setGameStatus(GameStatus.won));
+      dispatchStore(WinGame);
     }
   }, [currentGuesses]);
 

@@ -1,13 +1,15 @@
 import React from 'react';
 import {BaseModal} from './BaseModal';
 
-import {dispatchStore, useAppSelector} from '../../store/type';
+import {useAppDispatch, useAppSelector} from '../../store/type';
 
 import {closeModal} from '../../store/modal/slicer';
 import {toggleMajorScale} from '../../store/settings/slicer';
 
 
 export const SettingsModal = () => {
+  const dispatchStore = useAppDispatch();
+
   const {
     scale,
   } = useAppSelector((state) => state.persistedStore.settingsStore);

@@ -16,6 +16,7 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist/es/constants';
+import {reduxBatch} from '@manaflair/redux-batch';
 
 
 export const store = configureStore({
@@ -35,6 +36,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+  enhancers: (defaultEnhancers) => [reduxBatch, ...defaultEnhancers, reduxBatch],
 });
 
 

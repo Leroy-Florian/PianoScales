@@ -4,10 +4,12 @@ import {
   CogIcon,
   InformationCircleIcon,
 } from '@heroicons/react/outline';
-import {dispatchStore} from '../../store/type';
 import {toggleInfoModal, toggleSettingsModal} from '../../store/modal/slicer';
+import {useAppDispatch} from '../../store/type';
 
 export const Navbar = () => {
+  const dispatchStore = useAppDispatch();
+
   return (
     <div className="navbar">
       <div className="navbar-content px-5">

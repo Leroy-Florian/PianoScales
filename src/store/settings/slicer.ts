@@ -27,8 +27,6 @@ const initialState: Settings = {
   gameMode: EASY_MODE,
   userSettings: {
     firstTime: true,
-    dailyChallenge: false,
-    dailyObjectives: 0,
   },
 };
 

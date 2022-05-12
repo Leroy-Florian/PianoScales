@@ -3,11 +3,13 @@ import {ButtonWithArrow} from '../button/buttonWithArrow';
 import {DifficultyCard} from '../Card/CompleteCard';
 import {EASY_MODE, HARD_MODE, MEDIUM_MODE} from '../../constants/setting';
 import {DIFFICULTIES_SELECTION_DESC, DIFFICULTIES_SELECTION_TITLE, NEXT} from '../../constants/strings';
-import {dispatchStore} from '../../store/type';
+import {useAppDispatch} from '../../store/type';
 import {setGameMode} from '../../store/settings/slicer';
 import {gameModeSetting} from '../../domain/models/settings';
 
 export const InfoSection = () => {
+  const dispatchStore = useAppDispatch();
+
   const [mode, setMode]= useState<gameModeSetting>(EASY_MODE);
   return (
     <section>

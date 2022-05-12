@@ -1,4 +1,4 @@
-import {dispatchStore} from '../store/type';
+import {useAppDispatch} from '../store/type';
 import {addGuessed, addTries, incrementCurrentTry} from '../store/game/slicer';
 import {Game} from '../domain/models/game';
 import {GameService} from '../domain/services/gameService';
@@ -13,6 +13,8 @@ export const play = (
     midi : number,
     game : Game,
 ) : void => {
+  const dispatchStore = useAppDispatch();
+
   if (!guessIsAlreadyTried(game.currentGuesses, midi)) {
     dispatchStore(addTries(midi));
   }

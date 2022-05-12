@@ -3,8 +3,6 @@ export type Settings = {
     gameMode : gameModeSetting,
     userSettings :{
         firstTime: boolean,
-        dailyChallenge: boolean,
-        dailyObjectives: number,
     }
 }
 
