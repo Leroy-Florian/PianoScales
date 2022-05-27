@@ -3,6 +3,7 @@ import {resetGame, setGameStatus} from '../store/game/slicer';
 import {GameStatus} from '../domain/models/game';
 import {updateBestStreak, updateSuccessRate} from '../store/Stats/Slicer';
 import {toggleFirstTime} from '../store/settings/slicer';
+import {setRecordingMode, setScaleToPlay} from '../store/piano/slicer';
 
 export const FirstTime = [toggleInfoModal(), toggleFirstTime()];
 export const updateStats = [updateSuccessRate(), updateBestStreak()];
@@ -18,4 +19,11 @@ export const LooseGame = [
   ...updateStats,
   resetGame(),
 ];
+
+
+export const playRecordedScale = (scale : number[]) => [
+  setScaleToPlay(scale),
+  setRecordingMode('PLAYING'),
+];
+
 

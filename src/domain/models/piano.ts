@@ -3,13 +3,15 @@ export type Piano = {
     noteDuration: number,
     notesRecorded: boolean,
     activeNotes: [],
+    recording: recording
+}
+export type recording = {
     mode: PIANO_MODE,
-    recording: {
-        endTime: number,
-        notes: number[],
-        events: [],
-        currentTime: number,
-    },
+    endTime: number,
+    // notes: any[],
+    events: any[],
+    currentTime: number,
+    currentEvents: any[],
 }
 
 type PIANO_MODE = 'RECORDING' | 'PLAYING' | 'STOPPED';
